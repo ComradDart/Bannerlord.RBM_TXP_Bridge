@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>RBM_TXP_Bridge</AssemblyName>
+    <RootNamespace>RBM_TXP_Bridge</RootNamespace>
+    <Version>1.0.0</Version>
+    <!-- These mods are closed-source; we bind to them purely by reflection. -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GameFolder Condition="'$(GameFolder)' == ''">D:\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</GameFolder>
+    <GameBinFolder>$(GameFolder)\bin\Win64_Shipping_Client</GameBinFolder>
+    <ModuleFolder>$(GameFolder)\Modules\RBM_TXP_Bridge</ModuleFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>$(GameFolder)\Modules\Bannerlord.Harmony\bin\Win64_Shipping_Client\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.MountAndBlade">
+      <HintPath>$(GameBinFolder)\TaleWorlds.MountAndBlade.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.Library">
+      <HintPath>$(GameBinFolder)\TaleWorlds.Library.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.Core">
+      <HintPath>$(GameBinFolder)\TaleWorlds.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Deploy straight into the game's Modules folder after a successful build. -->
+  <Target Name="DeployModule" AfterTargets="Build">
+    <MakeDir Directories="$(ModuleFolder)\bin\Win64_Shipping_Client" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModuleFolder)\bin\Win64_Shipping_Client" />
+    <Copy SourceFiles="$(TargetDir)$(AssemblyName).pdb"
+          DestinationFolder="$(ModuleFolder)\bin\Win64_Shipping_Client"
+          Condition="Exists('$(TargetDir)$(AssemblyName).pdb')" />
+    <Copy SourceFiles="Module\SubModule.xml" DestinationFolder="$(ModuleFolder)" />
+    <Message Importance="high" Text="Deployed RBM_TXP_Bridge -> $(ModuleFolder)" />
+  </Target>
+
+</Project>

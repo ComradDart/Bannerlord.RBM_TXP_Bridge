@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+  <Id value="RBM_TXP_Bridge" />
+  <Name value="RBM x TXP Tournament Bridge" />
+  <Version value="v1.0.0" />
+  <SingleplayerModule value="true" />
+  <MultiplayerModule value="false" />
+  <DefaultModule value="false" />
+  <ModuleCategory value="Singleplayer" />
+  <ModuleType value="Community" />
+
+  <DependedModules>
+    <DependedModule Id="Bannerlord.Harmony" />
+    <DependedModule Id="Native" />
+    <DependedModule Id="SandBoxCore" />
+    <DependedModule Id="Sandbox" />
+  </DependedModules>
+
+  <!--
+    Must load AFTER both mods so their Harmony patches are already registered
+    and their types are resolvable by name. Both are optional: with either one
+    absent the bridge detects nothing and no-ops.
+  -->
+  <DependedModuleMetadatas>
+    <DependedModuleMetadata id="Bannerlord.Harmony" order="LoadBeforeThis" />
+    <DependedModuleMetadata id="Native" order="LoadBeforeThis" />
+    <DependedModuleMetadata id="SandBoxCore" order="LoadBeforeThis" />
+    <DependedModuleMetadata id="Sandbox" order="LoadBeforeThis" />
+    <DependedModuleMetadata id="StoryMode" order="LoadBeforeThis" optional="true" />
+    <DependedModuleMetadata id="RBM" order="LoadBeforeThis" optional="true" />
+    <DependedModuleMetadata id="TournamentsXPanded" order="LoadBeforeThis" optional="true" />
+  </DependedModuleMetadatas>
+
+  <SubModules>
+    <SubModule>
+      <Name value="RBM_TXP_Bridge" />
+      <DLLName value="RBM_TXP_Bridge.dll" />
+      <SubModuleClassType value="RBM_TXP_Bridge.SubModule" />
+      <Tags>
+        <Tag key="DedicatedServerType" value="none" />
+        <Tag key="IsNoRenderModeElement" value="false" />
+      </Tags>
+    </SubModule>
+  </SubModules>
+  <Xmls />
+</Module>
