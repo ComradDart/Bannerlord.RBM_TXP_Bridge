@@ -18,7 +18,7 @@ prize selection and reroll back.
 ## Requirements
 
 - Mount & Blade II: Bannerlord (tested on v1.4.7)
-- [Harmony](https://www.nexusmods.com/mountandblade2bannerlord/mods/2006)
+- [Harmony](https://github.com/BUTR/Bannerlord.Harmony)
 - Realistic Battle Mod (tested v4.3.4), with its tournament module **enabled**
 - Tournaments XPanded (tested v5.13.15.2)
 
@@ -26,8 +26,9 @@ Both mods are optional at runtime — with either missing, this module loads and
 
 ## Install
 
-Drop the `Modules/RBM_TXP_Bridge` folder into your Bannerlord directory and enable it in the
-launcher, **loaded after both RBM and TournamentsXPanded**.
+Grab the archive from [Releases](https://github.com/ComradDart/Bannerlord.RBM_TXP_Bridge/releases),
+extract the `Modules/RBM_TXP_Bridge` folder into your Bannerlord directory, and enable it in the
+launcher **loaded after both RBM and TournamentsXPanded**.
 
 ## Configuration
 
